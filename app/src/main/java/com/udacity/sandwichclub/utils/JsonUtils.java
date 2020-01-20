@@ -24,10 +24,10 @@ public class JsonUtils {
         try {
             JSONObject rootJSONObject = new JSONObject(json);
 
-            JSONObject name = rootJSONObject.getJSONObject(SANDWICH_NAME);
-            sandwich.setMainName(name.getString(SANDWICH_MAIN_NAME));
+            JSONObject nameObject = rootJSONObject.getJSONObject(SANDWICH_NAME);
+            sandwich.setMainName(nameObject.getString(SANDWICH_MAIN_NAME));
 
-            JSONArray alsoKnownAsJSONArray = rootJSONObject.getJSONArray(SANDWICH_AKA);
+            JSONArray alsoKnownAsJSONArray = nameObject.getJSONArray(SANDWICH_AKA);
             List<String> alsoKnownAs = new ArrayList<>();
             for (int i = 0; i < alsoKnownAsJSONArray.length(); i++) {
                 alsoKnownAs.add(alsoKnownAsJSONArray.getString(i));
