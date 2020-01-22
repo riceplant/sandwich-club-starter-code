@@ -3,6 +3,8 @@ package com.udacity.sandwichclub;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -67,30 +69,22 @@ public class DetailActivity extends AppCompatActivity {
         TextView originTextView = (TextView) findViewById(R.id.origin_tv);
         TextView ingredientsTextView = (TextView) findViewById(R.id.ingredients_tv);
 
-        StringBuilder alsoKnownAsStringBuilder = new StringBuilder();
+        String alsoKnownAsString = "";
         List<String> alsoKnownAsList = sandwich.getAlsoKnownAs();
         if (alsoKnownAsList.size() > 1) {
-            for (int i = 0; i < alsoKnownAsList.size(); i++) {
-                alsoKnownAsStringBuilder.append(alsoKnownAsList.get(i));
-            }
-            alsoKnownAsTextView.setText(alsoKnownAsList.toString());
+            alsoKnownAsString = TextUtils.join("\n", alsoKnownAsList);
+            alsoKnownAsTextView.setText(alsoKnownAsString);
         } else {
             alsoKnownAsTextView.setText(R.string.no_other_names_label);
         }
 
-        StringBuilder ingredientsStringBuilder = new StringBuilder();
+        String ingredientsString = "";
         List<String> ingredientsList = sandwich.getIngredients();
         if (ingredientsList.size() > 1) {
-            for (int i = 0; i < ingredientsList.size(); i++) {
-                ingredientsStringBuilder.append(ingredientsList.get(i));
-                // displaying each ingredient on a new line
-                if (i < ingredientsList.size() - 1) {
-                    ingredientsStringBuilder.append("\n");
-                }
-            }
-            ingredientsTextView.setText(ingredientsStringBuilder.toString());
+            ingredientsString = TextUtils.join("\n", ingredientsList);
         }
 
+        ingredientsTextView.setText(ingredientsString);
         descriptionTextView.setText(sandwich.getDescription());
 
         if (sandwich.getPlaceOfOrigin().equals("")) {
