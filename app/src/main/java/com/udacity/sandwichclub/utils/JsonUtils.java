@@ -24,8 +24,8 @@ public class JsonUtils {
         try {
             JSONObject rootJSONObject = new JSONObject(json);
 
-            JSONObject nameObject = rootJSONObject.getJSONObject(SANDWICH_NAME);
-            sandwich.setMainName(nameObject.getString(SANDWICH_MAIN_NAME));
+            JSONObject nameObject = rootJSONObject.optJSONObject(SANDWICH_NAME);
+            sandwich.setMainName(nameObject.optString(SANDWICH_MAIN_NAME));
 
             JSONArray alsoKnownAsJSONArray = nameObject.optJSONArray(SANDWICH_AKA);
             List<String> alsoKnownAs = new ArrayList<>();
